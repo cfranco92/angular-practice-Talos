@@ -26,6 +26,14 @@ export class PokemonsComponent implements OnInit {
     {
       name: 'Charmeleon',
       image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/5.png'
+    },
+    {
+      name: 'Charizar',
+      image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png'
+    },
+    {
+      name: 'Squirtle',
+      image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png'
     }
   ]
   constructor() { }
