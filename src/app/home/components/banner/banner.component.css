@@ -1,0 +1,11 @@
+.image-style {
+    padding-left: 30%;
+    padding-right: 30%;
+}
+
+.name-style {
+    text-align: center;
+    color: black;
+    font-size: 3rem;
+    margin-top: -4rem;
+}
