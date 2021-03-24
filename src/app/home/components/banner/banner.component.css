@@ -1,6 +1,7 @@
 .image-style {
     padding-left: 30%;
     padding-right: 30%;
+    image-rendering: pixelated;
 }
 
 .name-style {

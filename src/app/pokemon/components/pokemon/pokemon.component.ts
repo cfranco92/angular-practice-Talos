@@ -12,4 +12,7 @@ export class PokemonComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  selectPokemon() {
+    alert(`${this.pokemon.name} was selected`);
+  }
 }
