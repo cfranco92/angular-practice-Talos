@@ -36,6 +36,7 @@ export class PokemonsComponent implements OnInit {
       image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png'
     }
   ]
+
   constructor() { }
 
   ngOnInit(): void {
