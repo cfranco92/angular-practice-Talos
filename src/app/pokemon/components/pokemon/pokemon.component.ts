@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-pokemon',
@@ -7,9 +8,12 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class PokemonComponent implements OnInit {
   @Input() pokemon: any;
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
+    this.pokemon.image = `${environment.POKEMON_IMAGE_URL}${this.pokemon.url.split('/')[6]}.png`;
+
   }
 
   selectPokemon() {

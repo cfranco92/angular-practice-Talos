@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { PokemonService } from 'src/app/core/services/pokemon/pokemon.service';
 
 @Component({
   selector: 'app-pokemons',
@@ -6,40 +8,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pokemons.component.css']
 })
 export class PokemonsComponent implements OnInit {
-  pokemons: any = [
-    {
-      name: 'Bulbasaur',
-      image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png'
-    },
-    {
-      name: 'Ivysaur',
-      image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png'
-    },
-    {
-      name: 'Venusaur',
-      image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png'
-    },
-    {
-      name: 'Charmander',
-      image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png'
-    },
-    {
-      name: 'Charmeleon',
-      image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/5.png'
-    },
-    {
-      name: 'Charizar',
-      image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png'
-    },
-    {
-      name: 'Squirtle',
-      image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png'
-    }
-  ]
+  errorMessage = '';
+  sub!: Subscription;
+  pokemons: any = [];
 
-  constructor() { }
+  constructor(private pokemonService: PokemonService) { }
 
   ngOnInit(): void {
+    this.getPokemonsBy20();
+    console.log('pokemons', this.pokemons)
   }
 
+  getPokemonsBy20() {
+    this.sub = this.pokemonService.getPokemonsBy20().subscribe({
+      next: pokemons => {
+        this.pokemons = pokemons;
+        // this.filteredProducts = this.pokemons;
+      },
+      error: err => this.errorMessage = err
+    });
+  }
 }
