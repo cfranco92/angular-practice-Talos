@@ -9,13 +9,13 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class PokemonService {
-  counter: Number = 0;
-  private pokemonAPI = `${environment.API}pokemon?offset=${this.counter}&limit=20`;
-
+  // counter: number = 0;
   constructor(private http: HttpClient) { }
 
-  getPokemonsBy20(): Observable<Pokemon[]> {
-    return this.http.get<Pokemon[]>(this.pokemonAPI)
+  getPokemonsBy20(counter: number): Observable<Pokemon[]> {
+    const pokemonsUrl = `${environment.API}pokemon?offset=${counter}&limit=20`
+    // this.counter++;
+    return this.http.get<Pokemon[]>(pokemonsUrl)
       .pipe(
         tap(data => console.log('All: ' + JSON.stringify(data))),
         // catchError(this.handleError)

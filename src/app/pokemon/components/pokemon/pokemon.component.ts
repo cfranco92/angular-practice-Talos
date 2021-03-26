@@ -13,7 +13,6 @@ export class PokemonComponent implements OnInit {
 
   ngOnInit(): void {
     this.pokemon.image = `${environment.POKEMON_IMAGE_URL}${this.pokemon.url.split('/')[6]}.png`;
-
   }
 
   selectPokemon() {

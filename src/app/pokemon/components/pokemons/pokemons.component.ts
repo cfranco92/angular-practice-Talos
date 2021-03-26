@@ -8,7 +8,8 @@ import { PokemonService } from 'src/app/core/services/pokemon/pokemon.service';
   styleUrls: ['./pokemons.component.css']
 })
 export class PokemonsComponent implements OnInit {
-  errorMessage = '';
+  errorMessage: string = '';
+  counter: number = 0;
   sub!: Subscription;
   pokemons: any = [];
 
@@ -16,13 +17,13 @@ export class PokemonsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPokemonsBy20();
-    console.log('pokemons', this.pokemons)
   }
 
   getPokemonsBy20() {
-    this.sub = this.pokemonService.getPokemonsBy20().subscribe({
-      next: pokemons => {
-        this.pokemons = pokemons;
+    this.sub = this.pokemonService.getPokemonsBy20(this.counter).subscribe({
+      next: (pokemons: any) => {
+        this.pokemons = [...this.pokemons, ...pokemons.results];
+        this.counter += 20;
         // this.filteredProducts = this.pokemons;
       },
       error: err => this.errorMessage = err
