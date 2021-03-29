@@ -6,6 +6,7 @@ import { SharedModule } from '../shared/shared.module';
 import { PokemonRoutingModule } from './pokemon-routing.module';
 import { ModalViewComponent } from './components/modal-view/modal-view.component';
 import { ToastViewComponent } from './components/toast-view/toast-view.component';
+import { MaterialModule } from '../material/material.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ToastViewComponent } from './components/toast-view/toast-view.component
   imports: [
     CommonModule,
     SharedModule,
-    PokemonRoutingModule
+    PokemonRoutingModule,
+    MaterialModule
   ]
 })
 export class PokemonModule { }

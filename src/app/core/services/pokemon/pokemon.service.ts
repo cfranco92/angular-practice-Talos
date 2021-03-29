@@ -16,9 +16,9 @@ export class PokemonService {
     const pokemonsUrl = `${environment.API}pokemon?offset=${counter}&limit=20`
     // this.counter++;
     return this.http.get<Pokemon[]>(pokemonsUrl)
-      .pipe(
-        tap(data => console.log('All: ' + JSON.stringify(data))),
-        // catchError(this.handleError)
-      );
+    // .pipe(
+    //   tap(data => console.log('All: ' + JSON.stringify(data))),
+    //   catchError(this.handleError)
+    // );
   }
 }
