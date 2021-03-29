@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { PokemonService } from 'src/app/core/services/pokemon/pokemon.service';
 
@@ -7,7 +7,7 @@ import { PokemonService } from 'src/app/core/services/pokemon/pokemon.service';
   templateUrl: './pokemons.component.html',
   styleUrls: ['./pokemons.component.css']
 })
-export class PokemonsComponent implements OnInit {
+export class PokemonsComponent implements OnInit, OnDestroy {
   errorMessage: string = '';
   counter: number = 0;
   sub!: Subscription;
@@ -28,5 +28,9 @@ export class PokemonsComponent implements OnInit {
       },
       error: err => this.errorMessage = err
     });
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }
