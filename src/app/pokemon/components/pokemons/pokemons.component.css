@@ -3,3 +3,11 @@
     /* width: 85%; */
     padding-top: 10px;
 }
+
+.example-card {
+    max-width: 400px;
+}
+
+.content {
+    margin: 1% 14%;
+}

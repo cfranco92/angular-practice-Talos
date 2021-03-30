@@ -1,9 +1,9 @@
-<app-modal-view></app-modal-view>
-<app-toast-view></app-toast-view>
-<div class="container">
-  <div class="row justify-content-center" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
-    (scrolled)="getPokemonsBy20()">
-    <div class="col-auto col-xl-auto col-md-auto col-sm-auto col-xs-auto" *ngFor="let pokemon of pokemons">
+<!-- <app-modal-view></app-modal-view>
+<app-toast-view></app-toast-view> -->
+<div class="content" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+  (scrolled)="getPokemonsBy20()">
+  <div fxLayout="row wrap" fxLayoutGap="20px grid">
+    <div fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="33%" fxFlex.md="25%" *ngFor="let pokemon of pokemons">
       <app-pokemon [pokemon]="pokemon"></app-pokemon>
     </div>
   </div>

@@ -1,4 +1,4 @@
-<div class="card" (click)="selectPokemon()">
-  <img src="{{pokemon.image}}" class="card-img-top img-fluid image-style" alt="{{pokemon.name}} image">
-  <span class="card-header text-center">{{pokemon.name}}</span>
-</div>
+<mat-card class="example-card">
+  <img mat-card-image src="{{pokemon.image}}" alt="Photo of {{pokemon.name}}" class="image-style">
+  <mat-card-footer class="text-center">{{pokemon.name}}</mat-card-footer>
+</mat-card>
