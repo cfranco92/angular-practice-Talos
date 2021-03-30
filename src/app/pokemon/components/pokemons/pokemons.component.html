@@ -3,7 +3,7 @@
 <div class="content" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
   (scrolled)="getPokemonsBy20()">
   <div fxLayout="row wrap" fxLayoutGap="20px grid">
-    <div fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="33%" fxFlex.md="25%" *ngFor="let pokemon of pokemons">
+    <div fxFlex="20%" fxFlex.xs="50%" fxFlex.sm="33%" fxFlex.md="25%" *ngFor="let pokemon of pokemons">
       <app-pokemon [pokemon]="pokemon"></app-pokemon>
     </div>
   </div>
