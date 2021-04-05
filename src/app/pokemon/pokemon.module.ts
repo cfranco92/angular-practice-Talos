@@ -7,19 +7,23 @@ import { PokemonRoutingModule } from './pokemon-routing.module';
 import { ModalViewComponent } from './components/modal-view/modal-view.component';
 import { ToastViewComponent } from './components/toast-view/toast-view.component';
 import { MaterialModule } from '../material/material.module';
+import { ModalComponentComponent } from './components/modal-component/modal-component/modal-component.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     PokemonComponent,
     PokemonsComponent,
     ModalViewComponent,
-    ToastViewComponent
+    ToastViewComponent,
+    ModalComponentComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
     PokemonRoutingModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule,
   ]
 })
 export class PokemonModule { }
