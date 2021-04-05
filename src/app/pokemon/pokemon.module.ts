@@ -9,6 +9,7 @@ import { ToastViewComponent } from './components/toast-view/toast-view.component
 import { MaterialModule } from '../material/material.module';
 import { ModalComponentComponent } from './components/modal-component/modal-component/modal-component.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     PokemonRoutingModule,
     MaterialModule,
     ReactiveFormsModule,
+    StoreModule.forFeature('pokemons', {})
   ]
 })
 export class PokemonModule { }
