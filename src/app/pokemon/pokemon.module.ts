@@ -10,6 +10,7 @@ import { MaterialModule } from '../material/material.module';
 import { ModalComponentComponent } from './components/modal-component/modal-component/modal-component.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
+import { pokemonReducer } from './state/pokemon.reducer';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import { StoreModule } from '@ngrx/store';
     PokemonRoutingModule,
     MaterialModule,
     ReactiveFormsModule,
-    StoreModule.forFeature('pokemons', {})
+    StoreModule.forFeature('pokemons', pokemonReducer)
   ]
 })
 export class PokemonModule { }
