@@ -2,6 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Pokemon } from 'src/app/core/models/pokemon.model';
 import { PokemonService } from 'src/app/core/services/pokemon/pokemon.service';
+import { getPokemons, State } from '../../state/pokemon.reducer';
+import * as PokemonActions from '../../state/pokemon.actions'
 
 @Component({
   selector: 'app-pokemons',
@@ -12,22 +14,25 @@ export class PokemonsComponent implements OnInit, OnDestroy {
   errorMessage: string = '';
   counter: number = 0;
   pokemons: Pokemon[] = [];
+  pokemons2: Pokemon[] = [];
   displayCode: boolean = true;
 
   constructor(
     private pokemonService: PokemonService,
-    private store: Store<any>
+    private store: Store<State>
   ) { }
 
   ngOnInit(): void {
     this.getPokemonsBy20();
+    this.getPokemonsFromStore();
   }
 
   getPokemonsFromStore() {
-    this.store.select('pokemons').subscribe(
+    this.store.select(getPokemons).subscribe(
       pokemons => {
         if (pokemons) {
-          this.displayCode = pokemons.showProductCode
+          this.pokemons2 = pokemons
+          console.log('Pokemons:', this.pokemons2)
         }
       }
     )
@@ -45,9 +50,9 @@ export class PokemonsComponent implements OnInit, OnDestroy {
 
   // TODO: GET THE POKEMONS HERE
   checkChanged(): void {
-    this.store.dispatch({
-      type: '[Product] Togggle Product Code'
-    })
+    this.store.dispatch(PokemonActions.loadPokemons(
+      { pokemons: this.pokemons2 }
+    ))
   }
 
   ngOnDestroy(): void {

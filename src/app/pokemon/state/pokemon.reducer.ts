@@ -1,35 +1,53 @@
 /* NgRx */
-import { createReducer, on, createAction } from '@ngrx/store';
+import { createReducer, on, createAction, createFeatureSelector, createSelector } from '@ngrx/store';
+import { Pokemon } from 'src/app/core/models/pokemon.model';
 
+import * as PokemonActions from './pokemon.actions'
 import * as AppState from '../../state/app.state';
 
 // Extends the app state to include the pokemon feature.
 // This is required because pokemons are lazy loaded.
 // So the reference to PokemonState cannot be added to app.state.ts directly.
 export interface State extends AppState.State {
-    products: PokemonState;
+    pokemons: PokemonState;
 }
 
 // State for this feature (User)
 export interface PokemonState {
-    pokemons: [],
-    originalPokemons: [],
-    showProductCode: boolean
+    pokemons: Pokemon[],
+    originalPokemons: Pokemon[],
+    showModalView: boolean,
+    error: string,
 }
 
 const initialState: PokemonState = {
-    pokemons: [],
+    pokemons: [{ name: 'bulbasaur', descriptionUrl: '', results: [] }],
     originalPokemons: [],
-    showProductCode: true
+    showModalView: true,
+    error: ''
 }
+
+// Selector functions
+const getPokemonFeatureState = createFeatureSelector<PokemonState>('pokemons');
+
+export const getPokemons = createSelector(
+    getPokemonFeatureState,
+    state => state.pokemons
+);
 
 export const pokemonReducer = createReducer<PokemonState>(
     initialState,
-    on(createAction('[Product] Toggle Product Code'), (state): PokemonState => {
+    on(PokemonActions.loadPokemons, (state, action): PokemonState => {
         return {
             ...state,
-            showProductCode: !state.showProductCode
-            // showProductCode: state.showProductCode = false,
+            pokemons: action.pokemons,
+            error: ''
+        }
+    }),
+    on(PokemonActions.setModalView, (state): PokemonState => {
+        return {
+            ...state,
+            showModalView: !state.showModalView
         };
     })
 );
