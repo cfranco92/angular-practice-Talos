@@ -37,12 +37,22 @@ export const getPokemons = createSelector(
 
 export const pokemonReducer = createReducer<PokemonState>(
     initialState,
-    on(PokemonActions.loadPokemons, (state, action): PokemonState => {
+    on(PokemonActions.loadPokemonsSuccess, (state, action): PokemonState => {
         return {
             ...state,
-            pokemons: action.pokemons,
+            pokemons: [
+                ...state.pokemons,
+                ...action.pokemons
+            ],
             error: ''
         }
+    }),
+    on(PokemonActions.loadPokemonsFailure, (state, action): PokemonState => {
+        return {
+            ...state,
+            pokemons: [],
+            error: action.error
+        };
     }),
     on(PokemonActions.setModalView, (state): PokemonState => {
         return {
