@@ -50,9 +50,7 @@ export class PokemonsComponent implements OnInit, OnDestroy {
 
   // TODO: GET THE POKEMONS HERE
   checkChanged(): void {
-    this.store.dispatch(PokemonActions.loadPokemons(
-      { pokemons: this.pokemons2 }
-    ))
+    this.store.dispatch(PokemonActions.setModalView())
   }
 
   ngOnDestroy(): void {

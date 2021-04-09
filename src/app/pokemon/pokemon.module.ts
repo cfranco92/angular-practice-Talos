@@ -9,8 +9,12 @@ import { ToastViewComponent } from './components/toast-view/toast-view.component
 import { MaterialModule } from '../material/material.module';
 import { ModalComponentComponent } from './components/modal-component/modal-component/modal-component.component';
 import { ReactiveFormsModule } from '@angular/forms';
+
+/*  NgRx */
 import { StoreModule } from '@ngrx/store';
 import { pokemonReducer } from './state/pokemon.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { PokemonEffects } from './state/pokemon.effects';
 
 @NgModule({
   declarations: [
@@ -26,7 +30,8 @@ import { pokemonReducer } from './state/pokemon.reducer';
     PokemonRoutingModule,
     MaterialModule,
     ReactiveFormsModule,
-    StoreModule.forFeature('pokemons', pokemonReducer)
+    StoreModule.forFeature('pokemons', pokemonReducer),
+    EffectsModule.forFeature([PokemonEffects])
   ]
 })
 export class PokemonModule { }
