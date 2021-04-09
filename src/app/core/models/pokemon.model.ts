@@ -1,6 +1,5 @@
 export interface Pokemon {
     name: string;
-    descriptionUrl: string;
-    url?: string;
+    url: string;
     results: []
 }

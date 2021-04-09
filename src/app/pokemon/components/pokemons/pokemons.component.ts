@@ -16,7 +16,6 @@ export class PokemonsComponent implements OnInit, OnDestroy {
   errorMessage: string = '';
   counter: number = 0;
   pokemons: Pokemon[] = [];
-  pokemons2: Pokemon[] = [];
   displayCode: boolean = true;
 
   constructor(
@@ -26,8 +25,7 @@ export class PokemonsComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.getPokemonsBy20();
-    this.getPokemonsFromStore();
+    this.loadPokemonsApi();
   }
 
   selectPokemon(pokemon1Name: string, pokemon1Url: string) {
@@ -47,26 +45,21 @@ export class PokemonsComponent implements OnInit, OnDestroy {
     this.store.select(getPokemons).subscribe(
       pokemons => {
         if (pokemons) {
-          this.pokemons2 = pokemons
-          console.log('Pokemons:', this.pokemons2)
+          this.pokemons = pokemons
+          console.log('Pokemons:', this.pokemons)
         }
       }
     )
   }
 
-  getPokemonsBy20() {
-    this.pokemonService.getPokemonsBy20().subscribe({
-      next: (pokemons: any) => {
-        this.pokemons = [...this.pokemons, ...pokemons.results];
-        this.counter += 20;
-      },
-      error: err => this.errorMessage = err
-    });
-  }
-
   // TODO: GET THE POKEMONS HERE
   checkChanged(): void {
     this.store.dispatch(PokemonActions.setModalView())
+  }
+
+  loadPokemonsApi(): void {
+    this.store.dispatch(PokemonActions.loadPokemons())
+    this.getPokemonsFromStore();
   }
 
   ngOnDestroy(): void {

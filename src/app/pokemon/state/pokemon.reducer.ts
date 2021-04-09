@@ -21,7 +21,7 @@ export interface PokemonState {
 }
 
 const initialState: PokemonState = {
-    pokemons: [{ name: 'bulbasaur', descriptionUrl: '', results: [] }],
+    pokemons: [],
     originalPokemons: [],
     showModalView: true,
     error: ''
@@ -37,12 +37,12 @@ export const getPokemons = createSelector(
 
 export const pokemonReducer = createReducer<PokemonState>(
     initialState,
-    on(PokemonActions.loadPokemonsSuccess, (state, action): PokemonState => {
+    on(PokemonActions.loadPokemonsSuccess, (state, action: any): PokemonState => {
         return {
             ...state,
             pokemons: [
                 ...state.pokemons,
-                ...action.pokemons
+                ...action.pokemons.results
             ],
             error: ''
         }

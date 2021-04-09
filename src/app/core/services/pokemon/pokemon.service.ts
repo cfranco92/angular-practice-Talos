@@ -18,16 +18,8 @@ export class PokemonService {
     this.counter += 20;
   }
 
-  getPokemonsBy20(): Observable<Pokemon[]> {
-    this.urlSet()
-    return this.http.get<Pokemon[]>(this.pokemonsUrl)
-    // .pipe(
-    //   tap(data => console.log('All: ' + JSON.stringify(data))),
-    //   catchError(this.handleError)
-    // );
-  }
-
   getPokemons(): Observable<Pokemon[]> {
+    this.urlSet()
     return this.http.get<Pokemon[]>(this.pokemonsUrl)
       .pipe(
         tap(data => console.log(JSON.stringify(data))),
