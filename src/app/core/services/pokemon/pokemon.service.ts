@@ -9,15 +9,17 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class PokemonService {
+  counter: number = 0;
   pokemonsUrl: string = '';
   constructor(private http: HttpClient) { }
 
-  urlSet(counter: number) {
-    this.pokemonsUrl = `${environment.API}pokemon?offset=${counter}&limit=20`
+  urlSet() {
+    this.pokemonsUrl = `${environment.API}pokemon?offset=${this.counter}&limit=20`;
+    this.counter += 20;
   }
 
-  getPokemonsBy20(counter: number): Observable<Pokemon[]> {
-    this.urlSet(counter)
+  getPokemonsBy20(): Observable<Pokemon[]> {
+    this.urlSet()
     return this.http.get<Pokemon[]>(this.pokemonsUrl)
     // .pipe(
     //   tap(data => console.log('All: ' + JSON.stringify(data))),

@@ -1,5 +1,5 @@
 /* NgRx */
-import { createReducer, on, createAction, createFeatureSelector, createSelector } from '@ngrx/store';
+import { createReducer, on, createFeatureSelector, createSelector } from '@ngrx/store';
 import { Pokemon } from 'src/app/core/models/pokemon.model';
 
 import * as PokemonActions from './pokemon.actions'
