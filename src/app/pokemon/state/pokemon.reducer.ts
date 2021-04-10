@@ -16,6 +16,7 @@ export interface State extends AppState.State {
 export interface PokemonState {
     pokemons: Pokemon[],
     originalPokemons: Pokemon[],
+    selectedPokemons: Pokemon[],
     showModalView: boolean,
     error: string,
 }
@@ -23,6 +24,7 @@ export interface PokemonState {
 const initialState: PokemonState = {
     pokemons: [],
     originalPokemons: [],
+    selectedPokemons: [],
     showModalView: true,
     error: ''
 }
@@ -35,6 +37,11 @@ export const getPokemons = createSelector(
     state => state.pokemons
 );
 
+export const getSelectedPokemons = createSelector(
+    getPokemonFeatureState,
+    state => state.selectedPokemons
+);
+
 export const pokemonReducer = createReducer<PokemonState>(
     initialState,
     on(PokemonActions.loadPokemonsSuccess, (state, action: any): PokemonState => {
@@ -42,7 +49,7 @@ export const pokemonReducer = createReducer<PokemonState>(
             ...state,
             pokemons: [
                 ...state.pokemons,
-                ...action.pokemons.results
+                ...action.pokemons.results,
             ],
             error: ''
         }
@@ -59,6 +66,21 @@ export const pokemonReducer = createReducer<PokemonState>(
             ...state,
             showModalView: !state.showModalView
         };
+    }),
+    on(PokemonActions.setSelectedPokemons, (state, action): PokemonState => {
+        return {
+            ...state,
+            selectedPokemons: [
+                ...state.selectedPokemons,
+                action.pokemon,
+            ]
+        }
+    }),
+    on(PokemonActions.cleanSelectedPokemons, (state): PokemonState => {
+        return {
+            ...state,
+            selectedPokemons: []
+        }
     })
 );
 

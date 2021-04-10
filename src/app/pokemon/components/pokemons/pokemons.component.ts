@@ -27,19 +27,6 @@ export class PokemonsComponent implements OnInit, OnDestroy {
     this.loadPokemonsApi();
   }
 
-  selectPokemon(pokemon1Name: string, pokemon1Url: string) {
-    const dialogRef = this.dialog.open(PokemonModalComponent, {
-      width: '512px'
-    });
-    console.log(pokemon1Url)
-    localStorage.setItem('pokemon1Name', pokemon1Name)
-    localStorage.setItem('pokemon1Url', pokemon1Url)
-
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
-
   getPokemonsFromStore() {
     this.store.select(getPokemons).subscribe(
       pokemons => {
@@ -58,6 +45,20 @@ export class PokemonsComponent implements OnInit, OnDestroy {
 
   loadPokemonsApi(): void {
     this.store.dispatch(PokemonActions.loadPokemons())
+  }
+
+  selectPokemon(pokemon: Pokemon) {
+    const dialogRef = this.dialog.open(PokemonModalComponent, {
+      width: '512px'
+    });
+    // console.log(pokemon1Url)
+    // localStorage.setItem('pokemon1Name', pokemon1Name)
+    // localStorage.setItem('pokemon1Url', pokemon1Url)
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
+    this.store.dispatch(PokemonActions.setSelectedPokemons({ pokemon }))
   }
 
   ngOnDestroy(): void {

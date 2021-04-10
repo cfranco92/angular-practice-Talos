@@ -16,10 +16,7 @@
       fxFlex.md="25%"
       *ngFor="let pokemon of pokemons"
     >
-      <app-pokemon
-        [pokemon]="pokemon"
-        (click)="selectPokemon(pokemon.name, pokemon.url)"
-      >
+      <app-pokemon [pokemon]="pokemon" (click)="selectPokemon(pokemon)">
       </app-pokemon>
     </div>
   </div>

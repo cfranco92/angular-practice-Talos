@@ -1,4 +1,8 @@
-import { Component, InjectionToken, Input, OnInit } from '@angular/core';
+import { Component, InjectionToken, Input, OnInit, OnDestroy } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Pokemon } from 'src/app/core/models/pokemon.model';
+import { getSelectedPokemons, State } from '../../../state/pokemon.reducer';
+import * as PokemonActions from '../../../state/pokemon.actions'
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -11,17 +15,39 @@ export class ModalComponentComponent implements OnInit {
   name: string = '';
   url: string = '';
   image: string = '';
+  cleanModalView: boolean = true;
+  selectedPokemons: Pokemon[] = [];
 
-  constructor() { }
+  constructor(
+    private store: Store<State>,
+  ) { }
 
   ngOnInit(): void {
     this.getPokemonName();
-    console.log(this.url)
+    this.getSelectedPokemonsFromStore();
+  }
+
+  getSelectedPokemonsFromStore() {
+    this.store.select(getSelectedPokemons).subscribe(
+      pokemon => {
+        if (pokemon) {
+          this.selectedPokemons.push(...pokemon)
+          this.image = `${environment.POKEMON_IMAGE_URL}${this.selectedPokemons[0].url.split('/')[6]}.png`;
+          console.log('Pokemon:', this.selectedPokemons)
+        }
+      }
+    )
   }
 
   getPokemonName() {
     this.name = localStorage.getItem('pokemon1Name') || ''
     this.url = localStorage.getItem('pokemon1Url') || ''
-    this.image = `${environment.POKEMON_IMAGE_URL}${this.url.split('/')[6]}.png`;
+
+  }
+
+  ngOnDestroy(): void {
+    if (this.cleanModalView) {
+      this.store.dispatch(PokemonActions.cleanSelectedPokemons())
+    }
   }
 }

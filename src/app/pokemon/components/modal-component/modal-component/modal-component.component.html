@@ -1,9 +1,15 @@
-<h2 class="title-name" mat-dialog-title>{{ name | uppercase }}</h2>
+<h2 class="title-name" mat-dialog-title>
+  {{ selectedPokemons[0].name | uppercase }}
+</h2>
 <mat-divider></mat-divider>
 <mat-dialog-content class="mat-typography">
   <mat-grid-list cols="12" rowHeight="100px">
     <mat-grid-tile colspan="4" rowspan="3">
-      <img src="{{ image }}" alt="Photo of {{ name }}" class="image-style" />
+      <img
+        src="{{ image }}"
+        alt="Photo of {{ selectedPokemons[0].name }}"
+        class="image-style"
+      />
     </mat-grid-tile>
     <mat-grid-tile colspan="8" rowspan="1" style="margin-top: 10px">
       <div class="container" style="padding: 0; margin-top: 20px">
