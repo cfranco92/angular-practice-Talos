@@ -1,7 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, OnChanges } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Pokemon } from 'src/app/core/models/pokemon.model';
-import { PokemonService } from 'src/app/core/services/pokemon/pokemon.service';
 import { getPokemons, State } from '../../state/pokemon.reducer';
 import * as PokemonActions from '../../state/pokemon.actions'
 import { MatDialog } from '@angular/material/dialog';
@@ -19,12 +18,12 @@ export class PokemonsComponent implements OnInit, OnDestroy {
   displayCode: boolean = true;
 
   constructor(
-    private pokemonService: PokemonService,
     private store: Store<State>,
     public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
+    this.getPokemonsFromStore();
     this.loadPokemonsApi();
   }
 
@@ -59,7 +58,6 @@ export class PokemonsComponent implements OnInit, OnDestroy {
 
   loadPokemonsApi(): void {
     this.store.dispatch(PokemonActions.loadPokemons())
-    this.getPokemonsFromStore();
   }
 
   ngOnDestroy(): void {
